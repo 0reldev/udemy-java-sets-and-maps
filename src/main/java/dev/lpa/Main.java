@@ -68,6 +68,81 @@ public class Main {
         System.out.println(robinHood);
 //        Robin Hood: [RHood@sherwoodforest.org, rhood@gmail.Com] []
 
+        Set<Contact> unionAB = new HashSet<>();
+        unionAB.addAll(emailContacts);
+        unionAB.addAll(phoneContacts);
+        printData("(A ∪ B) Union of emails (A) with phones (B)", unionAB);
+//        --------------------
+//        (A ∪ B) Union of emails (A) with phones (B)
+//        --------------------
+//        Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        Charlie Brown: [] [(333) 444-5555]
+//        Maid Marion: [] [(123) 456-7890]
+//        Robin Hood: [RHood@sherwoodforest.org, rhood@gmail.Com] []
+//        Mickey Mouse: [mckmouse@gmail.com] []
+//        Daffy Duck: [daffy@google.com] []
+//        Minnie Mouse: [minnie@verizon.net] []
+
+        Set<Contact> intersectAB = new HashSet<>(emailContacts);
+        intersectAB.retainAll(phoneContacts);
+        printData("(A ∩ B) intersect emails (A) and phones (B)", intersectAB);
+//        --------------------
+//        (A ∩ B) intersect emails (A) and phones (B)
+//        --------------------
+//        Robin Hood: [RHood@sherwoodforest.org, rhood@gmail.Com] []
+//        Mickey Mouse: [mckmouse@gmail.com] []
+//        Minnie Mouse: [minnie@verizon.net] []
+
+        Set<Contact> intersectBA = new HashSet<>(phoneContacts);
+        intersectBA.retainAll(emailContacts);
+        printData("(B ∩ A) intersect phones (B) and emails (A)", intersectBA);
+//        --------------------
+//        (B ∩ A) intersect phones (B) and emails (A)
+//        --------------------
+//        Robin Hood: [] [(564) 789-3000]
+//        Mickey Mouse: [] [(999) 888-7777]
+//        Minnie Mouse: [] [(456) 780-5666]
+
+
+        Set<Contact> AMinusB = new HashSet<>(emailContacts);
+        AMinusB.removeAll(phoneContacts);
+        printData("(A - B) emails (A) - phones (B)", AMinusB);
+//        --------------------
+//        (A - B) intersect emails (A) - phones (B)
+//        --------------------
+//        Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        Daffy Duck: [daffy@google.com] []
+
+        Set<Contact> BMinusA = new HashSet<>(phoneContacts);
+        BMinusA.removeAll(emailContacts);
+        printData("(B - A) phones (B) - emails (A)", BMinusA);
+//        --------------------
+//        (B - A) phones (B) - emails (A)
+//        --------------------
+//        Charlie Brown: [] [(333) 444-5555]
+//        Maid Marion: [] [(123) 456-7890]
+
+        Set<Contact> symmetricDiff = new HashSet<>(AMinusB);
+        symmetricDiff.addAll(BMinusA);
+        printData("Symmetric difference: phones and emails", symmetricDiff);
+//        --------------------
+//        Symmetric difference: phones and emails
+//        --------------------
+//        Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        Charlie Brown: [] [(333) 444-5555]
+//        Maid Marion: [] [(123) 456-7890]
+//        Daffy Duck: [daffy@google.com] []
+
+        Set<Contact> symmetricDiff2 = new HashSet<>(unionAB);
+        symmetricDiff2.removeAll(intersectAB);
+        printData("Symmetric difference: phones and emails", symmetricDiff2);
+//        --------------------
+//        Symmetric difference: phones and emails
+//        --------------------
+//        Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        Charlie Brown: [] [(333) 444-5555]
+//        Maid Marion: [] [(123) 456-7890]
+//        Daffy Duck: [daffy@google.com] []
     }
 
     public static void printData(String header, Collection<Contact> contacts) {
