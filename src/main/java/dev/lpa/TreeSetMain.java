@@ -84,5 +84,91 @@ public class TreeSetMain {
 //        Mickey Mouse: [] [(999) 888-7777]
 //        Minnie Mouse: [] [(456) 780-5666]
         System.out.println("-".repeat(20));
+
+        Contact daffy = new Contact("Daffy Duck");
+        Contact daisy = new Contact("Daisy Duck");
+        Contact snoopy = new Contact("Snoopy");
+        Contact archie = new Contact("Archie");
+
+        for (Contact c : List.of(daffy, daisy, last, snoopy)) {
+            System.out.printf("ceiling(%s) = %s%n", c.getName(), fullSet.ceiling(c));
+            System.out.printf("higher(%s) = %s%n", c.getName(), fullSet.higher(c));
+        }
+//        ceiling(Daffy Duck) = Daffy Duck: [daffy@google.com] []
+//        higher(Daffy Duck) = Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        ceiling(Daisy Duck) = Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        higher(Daisy Duck) = Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        ceiling(Robin Hood) = Robin Hood: [] [(564) 789-3000]
+//        higher(Robin Hood) = null
+//        ceiling(Snoopy) = null
+//        higher(Snoopy) = null
+        System.out.println("-".repeat(20));
+
+        for (Contact c : List.of(daffy, daisy, first, archie)) {
+            System.out.printf("floor(%s) = %s%n", c.getName(), fullSet.floor(c));
+            System.out.printf("lower(%s) = %s%n", c.getName(), fullSet.lower(c));
+        }
+//        floor(Daffy Duck) = Daffy Duck: [daffy@google.com] []
+//        lower(Daffy Duck) = Charlie Brown: [] [(333) 444-5555]
+//        floor(Daisy Duck) = Daffy Duck: [daffy@google.com] []
+//        lower(Daisy Duck) = Daffy Duck: [daffy@google.com] []
+//        floor(Charlie Brown) = Charlie Brown: [] [(333) 444-5555]
+//        lower(Charlie Brown) = null
+//        floor(Archie) = null
+//        lower(Archie) = null
+        System.out.println("-".repeat(20));
+
+        NavigableSet<Contact> descendingSet = fullSet.descendingSet();
+        descendingSet.forEach(System.out::println);
+//        Robin Hood: [] [(564) 789-3000]
+//        Minnie Mouse: [] [(456) 780-5666]
+//        Mickey Mouse: [] [(999) 888-7777]
+//        Maid Marion: [] [(123) 456-7890]
+//        Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        Daffy Duck: [daffy@google.com] []
+//        Charlie Brown: [] [(333) 444-5555]
+        System.out.println("-".repeat(20));
+
+        Contact lastContact = descendingSet.pollLast();
+        System.out.println("Removed " +  lastContact);
+//        Removed Charlie Brown: [] [(333) 444-5555]
+        descendingSet.forEach(System.out::println);
+//        Robin Hood: [] [(564) 789-3000]
+//        Minnie Mouse: [] [(456) 780-5666]
+//        Mickey Mouse: [] [(999) 888-7777]
+//        Maid Marion: [] [(123) 456-7890]
+//        Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        Daffy Duck: [daffy@google.com] []
+        System.out.println("-".repeat(20));
+        fullSet.forEach(System.out::println);
+//        Daffy Duck: [daffy@google.com] []
+//        Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        Maid Marion: [] [(123) 456-7890]
+//        Mickey Mouse: [] [(999) 888-7777]
+//        Minnie Mouse: [] [(456) 780-5666]
+//        Robin Hood: [] [(564) 789-3000]
+        System.out.println("-".repeat(20));
+
+        Contact marion = new Contact("Maid Marion");
+
+        var headSet = fullSet.headSet(marion, true);
+        headSet.forEach(System.out::println);
+//        Daffy Duck: [daffy@google.com] []
+//        Linus Van Pelt: [lvpelt2015@gmail.com] []
+//        Maid Marion: [] [(123) 456-7890]
+        System.out.println("-".repeat(20));
+
+        var tailSet = fullSet.tailSet(marion, false);
+        tailSet.forEach(System.out::println);
+//        Mickey Mouse: [] [(999) 888-7777]
+//        Minnie Mouse: [] [(456) 780-5666]
+//        Robin Hood: [] [(564) 789-3000]
+        System.out.println("-".repeat(20));
+
+        Contact linus = new Contact("Linus Van Pelt");
+        var subset = fullSet.subSet(linus, false, marion, true);
+        subset.forEach(System.out::println);
+//        Maid Marion: [] [(123) 456-7890]
+
     }
 }
