@@ -42,7 +42,7 @@ public class Contact {
         return "%s: %s %s".formatted(name, emails, phones);
     }
 
-    public Contact mergeContactDate(Contact contact) {
+    public Contact mergeContactData(Contact contact) {
         Contact newContact = new Contact(name);
         newContact.emails = new HashSet<>(this.emails);
         newContact.phones = new HashSet<>(this.phones);
